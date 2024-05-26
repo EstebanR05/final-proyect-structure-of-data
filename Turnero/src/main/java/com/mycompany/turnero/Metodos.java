@@ -1,12 +1,13 @@
 package com.mycompany.turnero;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Metodos {
 
-    private ArrayList<Persona> listaNoPrioridad = new ArrayList<>();
-    private ArrayList<Persona> listaPrioridad = new ArrayList<>();
+    private Queue<Persona> listaNoPrioridad = new LinkedList<>();
+    private Queue<Persona> listaPrioridad = new LinkedList<>();
 
     public void crear() {
         Scanner leer = new Scanner(System.in);
@@ -31,23 +32,16 @@ public class Metodos {
 
     public void mostrarTurnos(int turno) {
         if (!this.listaPrioridad.isEmpty()) {
-            System.out.println("Turno n° " + turno + " Asignado a una persona con prioridad");
-            System.out.println("el parciente: " + this.listaPrioridad.get(0).toString());
-            eliminar(0);
+            System.out.println("Turno n° " + turno + " Asignado a una persona PRIORITARIA");
+            System.out.println("Atencion al cliente " + this.listaPrioridad.peek().toString() + " Sera atendido");
+            this.listaPrioridad.remove(this.listaPrioridad.peek());
         } else {
-            System.out.println("Turno n° " + turno + " Asignado a una persona No prioritaria");
-            System.out.println("el parciente: " + this.listaNoPrioridad.get(0).toString());
-            eliminar(0);
-        }
-    }
-
-    private void eliminar(int indice) {
-        if (!this.listaPrioridad.isEmpty()) {
-            this.listaPrioridad.remove(indice);
-        } else {
-            this.listaNoPrioridad.remove(indice);
+            System.out.println("Turno n° " + turno + " Asignado a una persona NO PRIORITARIA");
+            System.out.println("Atencion al cliente " + this.listaNoPrioridad.peek().toString() + " Sera atendido");
+            this.listaNoPrioridad.remove(this.listaNoPrioridad.peek());
         }
 
         System.out.println("El paciente ha sido atendido correctamente");
     }
+
 }

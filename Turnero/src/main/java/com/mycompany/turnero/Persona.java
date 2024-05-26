@@ -36,4 +36,9 @@ public class Persona {
         this.prioridad = prioridad;
     }
 
+    @Override
+    public String toString() {
+        return "Persona{" + "nombreCompleto=" + nombreCompleto + ", cedula=" + cedula + ", prioridad=" + prioridad + '}';
+    }
+
 }
