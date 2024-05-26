@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Metodos {
 
-    ArrayList<Persona> listaNoPrioridad = new ArrayList<>();
-    ArrayList<Persona> listaPrioridad = new ArrayList<>();
+    private ArrayList<Persona> listaNoPrioridad = new ArrayList<>();
+    private ArrayList<Persona> listaPrioridad = new ArrayList<>();
 
     public void crear() {
         Scanner leer = new Scanner(System.in);
@@ -29,44 +29,25 @@ public class Metodos {
         }
     }
 
-    public void actualizar() {
-        Scanner leer = new Scanner(System.in);
-
-        System.out.println("Ingrese el indice del usuario a editar");
-        Integer indice = leer.nextInt();
-        leer.nextLine();
-
-        System.out.println("Ingrese el nombre completo");
-        String nombreCompleto = leer.nextLine();
-
-        System.out.println("Ingrese el numero de cedula");
-        int cedula = leer.nextInt();
-
-        System.out.println("¿es una prioridad? ingrese true para si y false para No");
-        boolean prioridad = leer.nextBoolean();
-
-        Persona persona = new Persona(nombreCompleto, cedula, prioridad);
-
-        if (prioridad == true) {
-            this.listaPrioridad.add(persona);
+    public void mostrarTurnos(int turno) {
+        if (!this.listaPrioridad.isEmpty()) {
+            System.out.println("Turno n° " + turno + " Asignado a una persona con prioridad");
+            System.out.println("el parciente: " + this.listaPrioridad.get(0).toString());
+            eliminar(0);
         } else {
-            this.listaNoPrioridad.add(persona);
+            System.out.println("Turno n° " + turno + " Asignado a una persona No prioritaria");
+            System.out.println("el parciente: " + this.listaNoPrioridad.get(0).toString());
+            eliminar(0);
         }
     }
 
-    public void eliminar() {
-        Scanner leer = new Scanner(System.in);
-
-        System.out.println("Ingrese el indice del usuario a editar");
-        Integer indice = leer.nextInt();
-
-        System.out.println("¿es una prioridad? ingrese true para si y false para No");
-        boolean prioridad = leer.nextBoolean();
-
-        if (prioridad == true) {
+    private void eliminar(int indice) {
+        if (!this.listaPrioridad.isEmpty()) {
             this.listaPrioridad.remove(indice);
         } else {
             this.listaNoPrioridad.remove(indice);
         }
+
+        System.out.println("El paciente ha sido atendido correctamente");
     }
 }
