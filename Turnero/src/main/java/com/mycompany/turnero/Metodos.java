@@ -18,7 +18,7 @@ public class Metodos {
         System.out.println("Ingrese el numero de cedula");
         int cedula = leer.nextInt();
 
-        System.out.println("¿es una prioridad? ingrese true para si y false para No");
+        System.out.println("¿Es una prioridad? ingrese true para SI y false para NO");
         boolean prioridad = leer.nextBoolean();
 
         Persona persona = new Persona(nombreCompleto, cedula, prioridad);
@@ -32,16 +32,27 @@ public class Metodos {
 
     public void mostrarTurnos(int turno) {
         if (!this.listaPrioridad.isEmpty()) {
-            System.out.println("Turno n° " + turno + " Asignado a una persona PRIORITARIA");
-            System.out.println("Atencion al cliente " + this.listaPrioridad.peek().toString() + " Sera atendido");
-            this.listaPrioridad.remove(this.listaPrioridad.peek());
+            System.out.println("Turno n°" + turno + " Asignado a una persona PRIORITARIA");
+            System.out.println("El paciente " + listaPrioridad.peek() + "\nEn espera de ser atendido");
+        } else if (!this.listaNoPrioridad.isEmpty()) {
+            System.out.println("Turno n°" + turno + " Asignado a una persona NO PRIORITARIA");
+            System.out.println("El paciente " + listaNoPrioridad.peek() + "\nEn espera de ser atendido");
         } else {
-            System.out.println("Turno n° " + turno + " Asignado a una persona NO PRIORITARIA");
-            System.out.println("Atencion al cliente " + this.listaNoPrioridad.peek().toString() + " Sera atendido");
-            this.listaNoPrioridad.remove(this.listaNoPrioridad.peek());
+            System.out.println("Error no hay paciente por atender");
         }
-
-        System.out.println("El paciente ha sido atendido correctamente");
     }
 
+    public void atenderPaciente() {
+        if (!this.listaPrioridad.isEmpty()) {
+            System.out.println("El paciente " + this.listaPrioridad.peek().toString());
+            this.listaPrioridad.remove(this.listaPrioridad.peek());
+            System.out.println("Ha sido atendido correctamente");
+        } else if (!this.listaNoPrioridad.isEmpty()) {
+            System.out.println("El paciente" + this.listaNoPrioridad.peek().toString());
+            this.listaNoPrioridad.remove(this.listaNoPrioridad.peek());
+            System.out.println("Ha sido atendido correctamente");
+        } else {
+            System.out.println("Error no hay paciente por atender");
+        }
+    }
 }
